@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
 
-require "chownmod"
+require 'chownmod'
+Chownmod::App.run

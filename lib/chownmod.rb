@@ -1,5 +1,9 @@
-require "chownmod/version"
+require 'chownmod/version'
 
 module Chownmod
-  # Your code goes here...
+  class App
+    def self.run
+      puts 'i am running'
+    end
+  end
 end
