@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
-require 'chownmod'
-Chownmod::App.run
+require 'chom'
+Chom::App.run

@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'chownmod/version'
+require 'chom/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'chownmod'
-  spec.version       = Chownmod::VERSION
+  spec.name          = 'chom'
+  spec.version       = Chom::VERSION
   spec.authors       = ['Sean Lerner']
   spec.email         = ['sean@smallcity.ca']
 
   spec.summary       = 'Utility to chown and chmod a folder recursive so web app has write access to folder.'
-  spec.homepage      = 'https://gitlab.com/sl_projects/chownmod'
+  spec.homepage      = 'https://gitlab.com/sl_projects/chom'
   spec.license       = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
