@@ -14,6 +14,8 @@ module Chom
       chmod_dir_and_files_recursively
     end
 
+    private
+
     def chown_dir_and_files_recursively
       print "Attempting 'chown -R g+w .' as '#{@user}'... "
       FileUtils.chmod_R 'g+w', '.'
