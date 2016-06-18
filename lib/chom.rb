@@ -1,39 +1,41 @@
 require 'chom/version'
 require 'fileutils'
+require 'colorize'
 
 module Chom
   class App
-    class << self
-      attr_accessor :user
+    attr_reader :user
+
+    def initialize
+      @user = ENV['SUDO_USER']
     end
 
-    @user = ENV['USER']
-
-    def self.run
-      puts 'Starting.'
-      # chom
-    rescue SystemCallError => e # TODO: maybe try errno::whatever it was before
-      # system 'sudo -s'
-      system('sudo -s ')
-      chom
-      system 'exit'
-    ensure
-      puts 'Finished.'
+    def run
+      chown_dir_and_files_recursively
+      chmod_dir_and_files_recursively
     end
 
-    def chom
-      # chown_dir_and_files_recursively
-      # chmod_dir_and_files_recursively
-    end
-
-    def self.chown_dir_and_files_recursively
+    def chown_dir_and_files_recursively
+      print "Attempting 'chown -R g+w .' as '#{@user}'... "
       FileUtils.chmod_R 'g+w', '.'
+      puts 'Success!'.green
+    rescue Errno::EPERM
+      puts 'Failed.'.red
+      suggest_running_as_sudo_and_exit
     end
 
-    def self.chmod_dir_and_files_recursively
+    def chmod_dir_and_files_recursively
+      print "Attempting 'chmod -R #{@user}:www' as '#{@user}'... "
       FileUtils.chown_R @user, 'www', '.'
+      puts 'Success!'.green
+    rescue Errno::EPERM
+      puts 'Failed.'.red
+      suggest_running_as_sudo_and_exit
+    end
+
+    def suggest_running_as_sudo_and_exit
+      puts "Try running with 'sudo chom'".yellow
+      exit 1
     end
   end
 end
-
-# ruby -e "require '../lib/chom.rb'; Chom::App.run"
