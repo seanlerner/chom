@@ -6,7 +6,7 @@ module Chom
     attr_reader :user
 
     def initialize
-      @user = ENV['SUDO_USER'] || ENV['USER']
+      @user = Etc.getlogin
     end
 
     def run
