@@ -1,28 +1,29 @@
 # Chom
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/chom`. To experiment with that code, run `bin/console` for an interactive prompt.
+Chom is a command line utility that alters the permissions of your current directory and its subdirectories to work properly with your
+web server.
 
-TODO: Delete this and the text above, and describe your gem
+Specificaly, it executes:
+
+    $ chown -R g+w .
+    $ chmod -R <username>:www .
+
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'chom'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+Install it from the command line:
 
     $ gem install chom
 
 ## Usage
 
-TODO: Write usage instructions here
+From the command line, go into the directory you'd like to alter the permissions of, and execute:
+
+    $ chom
+
+If permissions weren't able to be altered properly, chom will exit and suggest you attempt with sudo:
+
+    $ sudo chom
 
 ## Development
 
@@ -32,7 +33,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/chom. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitLab at https://gitlab.com/seanlerner/chom. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
