@@ -6,14 +6,14 @@ require 'fileutils'
 #
 # Specificaly, it executes:
 #   $ chown -R g+w .
-#   $ chmod -R <username>:www .
+#   $ chmod -R <username>:<system www group> .
 
 module Chom
   # The App class stores Chom's functionality. It is executed with Chom::App.new.run.
   class App
     attr_reader :user
 
-    # Creates Chom instance and assigns logged in user's username to @user.
+    # Creates Chom instance and sets user and group
     def initialize
       @user = Etc.getlogin
       @group = system_www_group
@@ -64,6 +64,7 @@ module Chom
       exit false
     end
 
+    # Failure Message for both chown and chmod
     def sudo_msg
       "Try running with 'sudo chom'."
     end

@@ -6,8 +6,7 @@ web server.
 Specificaly, it executes:
 
     $ chown -R g+w .
-    $ chmod -R <username>:www .
-
+    $ chmod -R <username>:<system www group> .
 
 ## Installation
 
