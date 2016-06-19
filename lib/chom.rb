@@ -16,6 +16,7 @@ module Chom
     # Creates Chom instance and assigns logged in user's username to @user.
     def initialize
       @user = Etc.getlogin
+      @group = system_www_group
     end
 
     # Chom command line utility executes run to recursively chown and chmod the current directory.
@@ -26,30 +27,45 @@ module Chom
 
     private
 
+    # Figure out system www group
+    def system_www_group
+      %w(www-data www).each do |possible_www_group|
+        begin
+          return possible_www_group if Etc.getgrnam possible_www_group
+        rescue ArgumentError
+          next
+        end
+      end
+      failure_exit_with_msg "I can't figure out the proper www group for this system."
+    end
+
     # Recursively changes ownership of current directory to the logged in user with the group www.
     def chown_dir_and_files_recursively
       print "Attempting 'chown -R g+w .' as '#{@user}'... "
       FileUtils.chmod_R 'g+w', '.'
       puts 'Success!'
     rescue Errno::EPERM
-      puts 'Failed.'
-      suggest_running_as_sudo_and_exit
+      failure_exit_with_msg sudo_msg
     end
 
     # Recursively changes permissions of current directory to be group writable.
     def chmod_dir_and_files_recursively
-      print "Attempting 'chmod -R #{@user}:www' as '#{@user}'... "
-      FileUtils.chown_R @user, 'www', '.'
+      print "Attempting 'chmod -R #{@user}:#{@group}' as '#{@user}'... "
+      FileUtils.chown_R @user, @group, '.'
       puts 'Success!'
     rescue Errno::EPERM
-      puts 'Failed.'
-      suggest_running_as_sudo_and_exit
+      failure_exit_with_msg sudo_msg
     end
 
     # Suggests running chom using sudo if regular execution fails due to lack of rights.
-    def suggest_running_as_sudo_and_exit
-      puts "Try running with 'sudo chom'."
+    def failure_exit_with_msg(msg)
+      puts 'Failed.'
+      puts msg
       exit false
+    end
+
+    def sudo_msg
+      "Try running with 'sudo chom'."
     end
   end
 end
