@@ -36,7 +36,7 @@ module Chom
 
     def suggest_running_as_sudo_and_exit
       puts "Try running with 'sudo chom'."
-      exit 1
+      exit false
     end
   end
 end

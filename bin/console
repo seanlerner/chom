@@ -5,7 +5,3 @@ require 'chom'
 require 'pry'
 
 Pry.start
-
-# require 'irb'
-
-# IRB.start
