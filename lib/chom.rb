@@ -8,7 +8,7 @@ require 'fileutils'
 # Specificaly, it executates `chown -R g+w .` and `chmod -R <username>:www .`
 
 module Chom
-  # Chom functionality
+  # +Chom's+ functionality is stored in its App class and executed with Chom.new.run
   class App
     # @user is used through this class to reference logged in user's username
     attr_reader :user
