@@ -1,14 +1,25 @@
 require 'chom/version'
 require 'fileutils'
 
+# +Chom+ is a command line utility that alters the permissions of your
+# current directory and its subdirectories to work properly with your web
+# server.
+#
+# Specificaly, it executates `chown -R g+w .` and `chmod -R <username>:www .`
+
 module Chom
+  # Chom functionality
   class App
+    # @user is used through this class to reference logged in user's username
     attr_reader :user
 
+    # When a Chom instance is created, logged in user's username is stored in @user
     def initialize
       @user = Etc.getlogin
     end
 
+    # `chom` command line utility executes `run` to both chown and chmod currently
+    # directory recursively
     def run
       chown_dir_and_files_recursively
       chmod_dir_and_files_recursively
