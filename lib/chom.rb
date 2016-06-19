@@ -4,7 +4,7 @@ require 'fileutils'
 # Chom is a command line utility that alters the permissions of your current directory and its subdirectories to work
 # properly with your web server.
 #
-# Specificaly, it executes:
+# Specifically, it executes:
 #   $ chown -R g+w .
 #   $ chmod -R <username>:<system www group> .
 
