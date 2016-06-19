@@ -11,7 +11,6 @@ require 'fileutils'
 module Chom
   # The App class stores Chom's functionality. It is executed with Chom::App.new.run.
   class App
-    # @user is used throughout this class to reference logged in user's username.
     attr_reader :user
 
     # Creates Chom instance and assigns logged in user's username to @user.
