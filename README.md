@@ -1,4 +1,4 @@
-# Chom
+# Chom [![Build Status](https://travis-ci.org/seanlerner/chom.svg?branch=master)](https://travis-ci.org/seanlerner/chom)
 
 Chom is a command line utility that alters the permissions of your current directory and its subdirectories to work properly with your
 web server.
