@@ -4,6 +4,7 @@ class ChomTest < Minitest::Test
   def setup
     @chom = Chom::App.new
     @user = Etc.getlogin
+    @system_www_group = /darwin/ =~ RUBY_PLATFORM ? 'www' : 'www-data'
   end
 
   def expected_chown_output
